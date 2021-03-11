@@ -1,0 +1,105 @@
+//font
+@import url("https://fonts.googleapis.com/css?family=Lato:300&display=swap");
+// import Sass
+@import "variables";
+@import "mixins";
+
+// normas generales
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Lato";
+  font-weight: 300;
+  font-size: 4vw;
+  color: white;
+}
+body {
+  background-color: white;
+}
+.canvas {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+.strip {
+  position: $pAbs;
+  width: 20%;
+  @include displayFlex;
+}
+
+// loop para generar las 5 strips
+@for $i from 1 through 5 {
+  .strip:nth-child(#{$i}) {
+    @include stripStyle(
+      (nth($colorList, $i)),
+      ($countWidth),
+      strip#{$i},
+      ($countDelay)
+    );
+    // stripStyle(background-color, position-left, animation-name, $delayAnim)
+  }
+  $countWidth: $countWidth + 20vw;
+  $countDelay: $countDelay + 0.2s;
+}
+
+// animaciones lineas
+@keyframes strip1 {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes strip2 {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@keyframes strip3 {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@keyframes strip4 {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@keyframes strip5 {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+// lineas cruzadas & hover
+.text {
+  @include displayFlex;
+  z-index: 10;
+}
+.strip::before {
+  content: "";
+  position: $pAbs;
+  width: 100%;
+  height: 100%;
+  transition-duration: 0.2s;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: skew(30deg);
+}
+.strip:hover::before {
+  transition-duration: 0.2s;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: skew(0deg);
+}

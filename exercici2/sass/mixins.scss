@@ -1,0 +1,21 @@
+@import "variables";
+
+@mixin stripStyle($background, $position, $numStrip, $delayAnim) {
+  left: $position;
+  background-color: $background;
+  height: 100vh;
+  animation-name: $numStrip;
+  animation-delay: $delayAnim;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+
+@mixin displayFlex {
+  display: flex;
+  overflow: hidden;
+  align-items: $pCent;
+  justify-content: $pCent;
+  text-align: $pCent;
+}
